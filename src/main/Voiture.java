@@ -12,42 +12,44 @@ public class Voiture {
 		vitesseVoiture = 10;
 		essenceVoiture = 40;
 		trajetVoiture = 0;
-		//winner = false;
 	}
 	
-	/*public Voiture(String couleur, int vitesse) {
-		couleurVoiture = couleur;
-		vitesseVoiture = vitesse;
-		essenceVoiture = 40;
-		trajetVoiture = 0;
-	}*/
-	
- public String description() {
-
-		return " à une vitesse de : " + this.vitesseVoiture + "km/h. Elle à actuellement " + this.essenceVoiture + "L d'essence dans sont réservoir et elle à parcourue : " + this.trajetVoiture + "km sur 100km";
+	public String description() {
+		return " à une vitesse de : " + this.vitesseVoiture + "km/h. Il lui reste " + this.essenceVoiture + "L d'essence et elle à parcourue : " + this.trajetVoiture + "km sur 100km";
 	}
 	
-	public String avancer(int multiplicateur) {
+ 
+	public void avancer(int multiplicateur) {
 		int go = multiplicateur * this.vitesseVoiture;
 		trajetVoiture += go;
-		// System.out.println(trajetVoiture);
 		essenceVoiture -= go;
-		// System.out.println(essenceVoiture);
 		
-		
-		//essenceVoiture = (essenceVoiture - go) + surplus;
-	
-		if(this.essenceVoiture <= 0) {
-			 System.out.println("Le conducteur n'a plus d'essence dans sa voiture \nHeureusement sont equipe lui remplis le reservoir en attendant le prochain tour !");
-			 
-			//  int surplus = essenceVoiture + go;
-			//  System.out.println("surplus : " + surplus);
-			 
-			// trajetVoiture = (trajetVoiture + go) - surplus ;
-			// System.out.println("trajet avec essecne < 40 : " + trajetVoiture);
-			essenceVoiture = 40;
+		if(this.essenceVoiture < 0) {
+			System.out.println("Le réservoir de la voiture n'étant que de 40L, elle n'a malheureusement pas pu parcourir les " + go + " km ");
+			int mult = multiplicateur * this.vitesseVoiture;
+			this.trajetVoiture += 40 - mult;
+			this.essenceVoiture = 0;
+			}
 		}
-		
-		return "La voiture est à " + this.trajetVoiture + "km sur 100km \n il lui reste " + this.essenceVoiture + " dans le reservoire";
+
+	public void stop() {
+		if(this.essenceVoiture <= 0) {
+			System.out.println("La voiture n'a plus d'essence : Methode STOP");
+		}
+	}
+	
+	public void plein() {
+		if(this.essenceVoiture <= 0) {
+			System.out.println("La voiture n'a plus d'essence \nSon équipe lui refais le pleins !");
+			this.essenceVoiture = 40;
+		}
+	}
+	
+	public String retourne() {
+		return "Methode avec retour";
+	}
+	
+	public void noReturn() {
+		System.out.println("Pas de retour de méthode. méthode vide");
 	}
 }
